@@ -91,6 +91,25 @@ def test_dataframe_toolbar_on_toolbar_hover(app: Page):
     expect(dataframe_toolbar).to_have_css("opacity", "1")
 
 
+def test_dataframe_toolbar_visible_on_keyboard_focus(app: Page):
+    """Test that the toolbar is shown when one of its buttons has focus."""
+    dataframe_element = app.get_by_test_id("stDataFrame").nth(0)
+    expect(dataframe_element).to_be_visible()
+    dataframe_element.scroll_into_view_if_needed()
+
+    dataframe_toolbar = dataframe_element.get_by_test_id("stElementToolbar")
+    expect(dataframe_toolbar).to_be_attached()
+    expect(dataframe_toolbar).to_have_css("opacity", "0")
+
+    column_visibility_button = dataframe_toolbar.get_by_test_id(
+        "stElementToolbarButton"
+    ).get_by_label("Show/hide columns")
+    column_visibility_button.focus()
+
+    expect(column_visibility_button).to_be_focused()
+    expect(dataframe_toolbar).to_have_css("opacity", "1")
+
+
 def test_open_search_via_toolbar(
     themed_app: Page, assert_snapshot: ImageCompareFunction
 ):

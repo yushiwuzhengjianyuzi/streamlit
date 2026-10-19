@@ -42,7 +42,7 @@ export const StyledToolbarWrapper = styled.div<StyledToolbarWrapperProps>(
       transition: "none",
       ...(!locked && {
         opacity: 0,
-        "&:active, &:focus-visible, &:hover": {
+        "&:active, &:focus-within, &:focus-visible, &:hover": {
           transition: "opacity 150ms 100ms, top 100ms 100ms",
           opacity: 1,
           top: topDistance,
